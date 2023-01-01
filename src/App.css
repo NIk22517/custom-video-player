@@ -1,38 +1,219 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.video-container {
+  width: 50%;
+  max-width: 1000px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-inline: auto;
+  position: relative;
+}
+video {
+  width: 100%;
+}
+
+.videos {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.player {
+  cursor: pointer;
+}
+.controls {
+  display: flex;
+  /* gap: 1rem; */
+  padding: 0.5rem;
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  right: 0;
   color: white;
+  align-items: center;
+}
+.player button,
+.sound_mute button,
+.fullscreen button {
+  border: none;
+  background-color: transparent;
+}
+svg {
+  color: royalblue;
+}
+.sound_mute {
+  display: flex;
+  align-items: center;
+}
+.time-range {
+  position: absolute;
+  /* display: flex; */
+  bottom: 35px;
+  width: 90%;
+  color: white;
+  /* align-items: center;
+  justify-content: space-around; */
 }
 
-.App-link {
-  color: #61dafb;
+.forward_backward {
+  display: flex;
+  gap: 1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.controls-end {
+  /* position: absolute; */
+  display: flex;
+  align-items: center;
+  bottom: 0;
+  /* right: 0; */
+  gap: 1rem;
+  /* padding: 0.5rem; */
+  justify-content: flex-end;
+  flex: 1;
 }
+.controls-end .forward_backward svg path {
+  width: 25px;
+  height: 25px;
+  color: royalblue;
+  stroke: royalblue;
+}
+
+.speed {
+  position: relative;
+}
+
+.speed-optios {
+  background-color: #8381806c;
+  width: 10vw;
+  height: 20vh;
+  overflow-x: auto;
+  padding: 0rem 1rem;
+  position: absolute;
+  bottom: 50px;
+  right: 0;
+}
+
+.speed-optios button {
+  display: flex;
+  width: 100%;
+  margin: 0.2rem 0rem;
+  padding: 0.2rem;
+}
+
+.speed-optios::-webkit-scrollbar {
+  width: 0.8em;
+}
+
+.speed-optios::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50px;
+  margin-block: 0.1em;
+}
+
+.speed-optios::-webkit-scrollbar-thumb {
+  background-color: rgb(240, 240, 240);
+  border: 0.25em solid rgb(102, 102, 102);
+  border-radius: 50px;
+}
+
+.progressBar {
+  --bar-bg: #ffe3d4;
+  --seek-before-width: 0;
+  --seek-before-color: #ffc2a1;
+  --knobby: #3452a5;
+  --selectedKnobby: #26c9c3;
+
+  appearance: none;
+  background: var(--bar-bg);
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: 11px;
+  outline: none;
+}
+
+/* progress bar - safari */
+.progressBar::-webkit-slider-runnable-track {
+  background: var(--bar-bg);
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: 11px;
+  outline: none;
+}
+
+/* progress bar - firefox */
+.progressBar::-moz-range-track {
+  background: var(--bar-bg);
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: 11px;
+  outline: none;
+}
+
+.progressBar::-moz-focus-outer {
+  border: 0;
+}
+
+/* progress bar - chrome and safari */
+.progressBar::before {
+  content: "";
+  height: 11px;
+  width: var(--seek-before-width);
+  background-color: var(--seek-before-color);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* progress bar - firefox */
+.progressBar::-moz-range-progress {
+  background-color: var(--seek-before-color);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 11px;
+}
+
+/* knobby - chrome and safari */
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--knobby);
+  cursor: pointer;
+  position: relative;
+  margin: -2px 0 0 0;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+/* knobby while dragging - chrome and safari */
+.progressBar:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+  background: var(--selectedKnobby);
+}
+
+/* knobby - firefox */
+.progressBar::-moz-range-thumb {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: transparent;
+  background-color: var(--knobby);
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+/* knobby while dragging - firefox */
+.progressBar:active::-moz-range-thumb {
+  transform: scale(1.2);
+  background: var(--selectedKnobby);
+}
+
